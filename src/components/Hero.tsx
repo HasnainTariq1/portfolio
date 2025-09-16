@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { useProfile } from "@/hooks/useProfile";
 import heroImage from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
+  const { data: profile } = useProfile();
+  
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -12,7 +15,7 @@ const Hero = () => {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(${profile?.hero_image_url || heroImage})` }}
       />
       
       {/* Gradient Overlay */}
@@ -21,14 +24,13 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <h1 className="text-6xl md:text-8xl font-bold font-heading mb-6 bg-gradient-primary bg-clip-text text-transparent">
-          John Doe
+          {profile?.name || "John Doe"}
         </h1>
         <p className="text-2xl md:text-3xl text-muted-foreground mb-4 font-light">
-          Full Stack Developer
+          {profile?.title || "Full Stack Developer"}
         </p>
         <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-          Crafting beautiful, functional web experiences with modern technologies. 
-          Passionate about clean code and innovative solutions.
+          {profile?.description || "Crafting beautiful, functional web experiences with modern technologies. Passionate about clean code and innovative solutions."}
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

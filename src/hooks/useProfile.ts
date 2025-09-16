@@ -1,0 +1,54 @@
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { supabase, type Profile } from '@/lib/supabase';
+
+export const useProfile = () => {
+  return useQuery({
+    queryKey: ['profile'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('profile')
+        .select('*')
+        .single();
+      
+      if (error && error.code !== 'PGRST116') throw error;
+      return data as Profile | null;
+    },
+  });
+};
+
+export const useUpdateProfile = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: async (profile: Partial<Profile>) => {
+      const { data: existing } = await supabase
+        .from('profile')
+        .select('id')
+        .single();
+      
+      if (existing) {
+        const { data, error } = await supabase
+          .from('profile')
+          .update({ ...profile, updated_at: new Date().toISOString() })
+          .eq('id', existing.id)
+          .select()
+          .single();
+        
+        if (error) throw error;
+        return data;
+      } else {
+        const { data, error } = await supabase
+          .from('profile')
+          .insert({ ...profile })
+          .select()
+          .single();
+        
+        if (error) throw error;
+        return data;
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
+    },
+  });
+};

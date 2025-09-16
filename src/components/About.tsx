@@ -1,4 +1,8 @@
+import { useAbout } from "@/hooks/useAbout";
+
 const About = () => {
+  const { data: about } = useAbout();
+  
   return (
     <section id="about" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
@@ -9,20 +13,13 @@ const About = () => {
         
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm a passionate full stack developer with over 5 years of experience creating 
-              digital solutions that make a difference. My journey in tech started with a 
-              curiosity for problem-solving and has evolved into a career dedicated to 
-              building beautiful, functional applications.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I specialize in modern web technologies and love working with React, Node.js, 
-              and cloud platforms. When I'm not coding, you can find me exploring new 
-              technologies, contributing to open source projects, or sharing knowledge 
-              with the developer community.
-            </p>
+            <div className="text-lg text-muted-foreground leading-relaxed whitespace-pre-wrap">
+              {about?.content || `I'm a passionate full stack developer with over 5 years of experience creating digital solutions that make a difference. My journey in tech started with a curiosity for problem-solving and has evolved into a career dedicated to building beautiful, functional applications.
+
+I specialize in modern web technologies and love working with React, Node.js, and cloud platforms. When I'm not coding, you can find me exploring new technologies, contributing to open source projects, or sharing knowledge with the developer community.`}
+            </div>
             <div className="flex flex-wrap gap-3 pt-4">
-              {['Problem Solving', 'Team Collaboration', 'Continuous Learning', 'Innovation'].map((trait) => (
+              {(about?.traits || ['Problem Solving', 'Team Collaboration', 'Continuous Learning', 'Innovation']).map((trait) => (
                 <span 
                   key={trait}
                   className="px-4 py-2 bg-secondary text-secondary-foreground rounded-full text-sm font-medium"

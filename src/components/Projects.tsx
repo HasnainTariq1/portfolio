@@ -2,42 +2,52 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github } from "lucide-react";
+import { useProjects } from "@/hooks/useProjects";
 
 const Projects = () => {
-  const projects = [
+  const { data: dbProjects = [] } = useProjects();
+  
+  // Fallback projects for when no projects are loaded yet
+  const defaultProjects = [
     {
+      id: 1,
       title: "E-Commerce Platform",
       description: "A full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard.",
       technologies: ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
-      image: "bg-gradient-to-br from-blue-400 to-purple-600",
-      github: "#",
-      live: "#"
+      image_url: null,
+      github_url: "#",
+      live_url: "#",
+      featured: true,
+      order_index: 0,
+      created_at: ""
     },
     {
-      title: "Task Management App",
+      id: 2,
+      title: "Task Management App", 
       description: "Collaborative project management tool with real-time updates, team chat, and advanced analytics.",
       technologies: ["Next.js", "TypeScript", "Prisma", "Socket.io", "Tailwind"],
-      image: "bg-gradient-to-br from-green-400 to-blue-600",
-      github: "#",
-      live: "#"
-    },
-    {
-      title: "AI Content Generator",
-      description: "AI-powered content creation platform that helps users generate blog posts, social media content, and marketing copy.",
-      technologies: ["React", "Python", "OpenAI API", "FastAPI", "Docker"],
-      image: "bg-gradient-to-br from-purple-400 to-pink-600",
-      github: "#",
-      live: "#"
-    },
-    {
-      title: "Real Estate Dashboard",
-      description: "Comprehensive dashboard for real estate professionals with property listings, analytics, and client management.",
-      technologies: ["Vue.js", "Express", "MongoDB", "Chart.js", "Mapbox"],
-      image: "bg-gradient-to-br from-orange-400 to-red-600",
-      github: "#",
-      live: "#"
+      image_url: null,
+      github_url: "#",
+      live_url: "#",
+      featured: true,
+      order_index: 1,
+      created_at: ""
     }
   ];
+  
+  const projects = dbProjects.length > 0 ? dbProjects : defaultProjects;
+  
+  const getProjectImage = (project: any, index: number) => {
+    if (project.image_url) return project.image_url;
+    
+    const gradients = [
+      "bg-gradient-to-br from-blue-400 to-purple-600",
+      "bg-gradient-to-br from-green-400 to-blue-600", 
+      "bg-gradient-to-br from-purple-400 to-pink-600",
+      "bg-gradient-to-br from-orange-400 to-red-600"
+    ];
+    return gradients[index % gradients.length];
+  };
 
   return (
     <section id="projects" className="py-20 px-4">
@@ -56,21 +66,23 @@ const Projects = () => {
               key={project.title}
               className="group hover:shadow-large transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border-0 shadow-soft"
             >
-              <div className={`h-48 ${project.image} relative overflow-hidden`}>
+              <div className={`h-48 relative overflow-hidden ${!project.image_url ? getProjectImage(project, index) : ''}`}
+                style={project.image_url ? { backgroundImage: `url(${project.image_url})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
+              >
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
                 <div className="absolute top-4 right-4 flex gap-2">
                   <Button
                     size="sm"
                     variant="secondary"
                     className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    onClick={() => window.open(project.github, '_blank')}
+                    onClick={() => window.open(project.github_url, '_blank')}
                   >
                     <Github className="w-4 h-4" />
                   </Button>
                   <Button
                     size="sm"
                     className="bg-primary/90 hover:bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    onClick={() => window.open(project.live, '_blank')}
+                    onClick={() => window.open(project.live_url, '_blank')}
                   >
                     <ExternalLink className="w-4 h-4" />
                   </Button>
