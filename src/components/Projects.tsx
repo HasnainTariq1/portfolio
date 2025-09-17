@@ -91,7 +91,7 @@ const Projects = () => {
               
               <CardHeader>
                 <CardTitle className="text-xl font-heading">{project.title}</CardTitle>
-                <CardDescription className="text-base leading-relaxed">
+                <CardDescription className="text-base leading-relaxed text-justify">
                   {project.description}
                 </CardDescription>
               </CardHeader>
