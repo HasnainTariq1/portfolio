@@ -1,5 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { supabase, type Profile } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
+import type { Database } from '@/integrations/supabase/types';
+
+type Profile = Database['public']['Tables']['profile']['Row'];
+type ProfileInsert = Database['public']['Tables']['profile']['Insert'];
+type ProfileUpdate = Database['public']['Tables']['profile']['Update'];
 
 export const useProfile = () => {
   return useQuery({
@@ -8,7 +13,7 @@ export const useProfile = () => {
       const { data, error } = await supabase
         .from('profile')
         .select('*')
-        .single();
+        .maybeSingle();
       
       if (error && error.code !== 'PGRST116') throw error;
       return data as Profile | null;
@@ -20,11 +25,11 @@ export const useUpdateProfile = () => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: async (profile: Partial<Profile>) => {
+    mutationFn: async (profile: ProfileUpdate) => {
       const { data: existing } = await supabase
         .from('profile')
         .select('id')
-        .single();
+        .maybeSingle();
       
       if (existing) {
         const { data, error } = await supabase
@@ -39,7 +44,7 @@ export const useUpdateProfile = () => {
       } else {
         const { data, error } = await supabase
           .from('profile')
-          .insert({ ...profile })
+          .insert(profile as ProfileInsert)
           .select()
           .single();
         

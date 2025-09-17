@@ -1,5 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { supabase, type About } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
+import type { Database } from '@/integrations/supabase/types';
+
+type About = Database['public']['Tables']['about']['Row'];
+type AboutInsert = Database['public']['Tables']['about']['Insert'];
+type AboutUpdate = Database['public']['Tables']['about']['Update'];
 
 export const useAbout = () => {
   return useQuery({
@@ -8,7 +13,7 @@ export const useAbout = () => {
       const { data, error } = await supabase
         .from('about')
         .select('*')
-        .single();
+        .maybeSingle();
       
       if (error && error.code !== 'PGRST116') throw error;
       return data as About | null;
@@ -20,11 +25,11 @@ export const useUpdateAbout = () => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: async (about: Partial<About>) => {
+    mutationFn: async (about: AboutUpdate) => {
       const { data: existing } = await supabase
         .from('about')
         .select('id')
-        .single();
+        .maybeSingle();
       
       if (existing) {
         const { data, error } = await supabase
@@ -39,7 +44,7 @@ export const useUpdateAbout = () => {
       } else {
         const { data, error } = await supabase
           .from('about')
-          .insert({ ...about })
+          .insert(about as AboutInsert)
           .select()
           .single();
         

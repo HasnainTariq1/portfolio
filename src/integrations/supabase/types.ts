@@ -14,7 +14,218 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      about: {
+        Row: {
+          content: string
+          created_at: string
+          id: number
+          traits: string[] | null
+          updated_at: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: number
+          traits?: string[] | null
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: number
+          traits?: string[] | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      contact_info: {
+        Row: {
+          created_at: string
+          href: string
+          icon: string
+          id: number
+          label: string
+          order_index: number
+          type: string
+          value: string
+        }
+        Insert: {
+          created_at?: string
+          href: string
+          icon: string
+          id?: number
+          label: string
+          order_index?: number
+          type: string
+          value: string
+        }
+        Update: {
+          created_at?: string
+          href?: string
+          icon?: string
+          id?: number
+          label?: string
+          order_index?: number
+          type?: string
+          value?: string
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: number
+          message: string
+          name: string
+          read: boolean
+          subject: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: number
+          message: string
+          name: string
+          read?: boolean
+          subject: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: number
+          message?: string
+          name?: string
+          read?: boolean
+          subject?: string
+        }
+        Relationships: []
+      }
+      profile: {
+        Row: {
+          created_at: string
+          description: string
+          hero_image_url: string | null
+          id: number
+          name: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          hero_image_url?: string | null
+          id?: number
+          name: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          hero_image_url?: string | null
+          id?: number
+          name?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          created_at: string
+          description: string
+          featured: boolean
+          github_url: string | null
+          id: number
+          image_url: string | null
+          live_url: string | null
+          order_index: number
+          technologies: string[] | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          featured?: boolean
+          github_url?: string | null
+          id?: number
+          image_url?: string | null
+          live_url?: string | null
+          order_index?: number
+          technologies?: string[] | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          featured?: boolean
+          github_url?: string | null
+          id?: number
+          image_url?: string | null
+          live_url?: string | null
+          order_index?: number
+          technologies?: string[] | null
+          title?: string
+        }
+        Relationships: []
+      }
+      skill_categories: {
+        Row: {
+          created_at: string
+          id: number
+          order_index: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          order_index?: number
+          title: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          order_index?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      skills: {
+        Row: {
+          category_id: number
+          created_at: string
+          id: number
+          name: string
+          order_index: number
+          proficiency: number
+        }
+        Insert: {
+          category_id: number
+          created_at?: string
+          id?: number
+          name: string
+          order_index?: number
+          proficiency: number
+        }
+        Update: {
+          category_id?: number
+          created_at?: string
+          id?: number
+          name?: string
+          order_index?: number
+          proficiency?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "skills_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "skill_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
