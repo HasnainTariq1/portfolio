@@ -16,7 +16,7 @@ export const useProjects = () => {
         .order('order_index', { ascending: true });
       
       if (error) throw error;
-      return data as Project[];
+      return data;
     },
   });
 };

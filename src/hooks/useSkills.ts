@@ -20,7 +20,7 @@ export const useSkillsWithCategories = () => {
         .order('order_index', { ascending: true });
       
       if (categoriesError) throw categoriesError;
-      return categories as (SkillCategory & { skills: Skill[] })[];
+      return categories;
     },
   });
 };

@@ -17,7 +17,7 @@ export const useContactInfo = () => {
         .order('order_index', { ascending: true });
       
       if (error) throw error;
-      return data as ContactInfo[];
+      return data;
     },
   });
 };
@@ -67,7 +67,7 @@ export const useMessages = () => {
         .order('created_at', { ascending: false });
       
       if (error) throw error;
-      return data as Message[];
+      return data;
     },
   });
 };

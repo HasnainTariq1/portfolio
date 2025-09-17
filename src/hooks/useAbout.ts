@@ -16,7 +16,7 @@ export const useAbout = () => {
         .maybeSingle();
       
       if (error && error.code !== 'PGRST116') throw error;
-      return data as About | null;
+      return data;
     },
   });
 };
