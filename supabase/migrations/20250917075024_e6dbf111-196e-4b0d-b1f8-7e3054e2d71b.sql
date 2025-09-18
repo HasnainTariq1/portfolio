@@ -102,3 +102,29 @@ CREATE POLICY "Allow authenticated users to modify skills" ON public.skills FOR 
 CREATE POLICY "Allow authenticated users to modify projects" ON public.projects FOR ALL USING (auth.uid() IS NOT NULL);
 CREATE POLICY "Allow authenticated users to modify contact_info" ON public.contact_info FOR ALL USING (auth.uid() IS NOT NULL);
 CREATE POLICY "Allow authenticated users to modify messages" ON public.messages FOR ALL USING (auth.uid() IS NOT NULL);
+
+
+-- Create storage bucket for portfolio images
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('portfolio-images', 'portfolio-images', true);
+
+-- Create policies for portfolio images
+CREATE POLICY "Portfolio images are publicly accessible" 
+ON storage.objects 
+FOR SELECT 
+USING (bucket_id = 'portfolio-images');
+
+CREATE POLICY "Authenticated users can upload portfolio images" 
+ON storage.objects 
+FOR INSERT 
+WITH CHECK (bucket_id = 'portfolio-images' AND auth.uid() IS NOT NULL);
+
+CREATE POLICY "Authenticated users can update portfolio images" 
+ON storage.objects 
+FOR UPDATE 
+USING (bucket_id = 'portfolio-images' AND auth.uid() IS NOT NULL);
+
+CREATE POLICY "Authenticated users can delete portfolio images" 
+ON storage.objects 
+FOR DELETE 
+USING (bucket_id = 'portfolio-images' AND auth.uid() IS NOT NULL);
