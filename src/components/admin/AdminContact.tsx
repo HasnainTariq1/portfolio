@@ -135,7 +135,7 @@ const AdminContact = () => {
                     id="value"
                     value={formData.value}
                     onChange={(e) => setFormData(prev => ({ ...prev, value: e.target.value }))}
-                    placeholder="e.g., john@example.com"
+                    placeholder="e.g., hasnain@example.com"
                     required
                   />
                 </div>
@@ -147,7 +147,7 @@ const AdminContact = () => {
                   id="href"
                   value={formData.href}
                   onChange={(e) => setFormData(prev => ({ ...prev, href: e.target.value }))}
-                  placeholder="e.g., mailto:john@example.com, https://github.com/johndoe"
+                  placeholder="e.g., mailto:hasnain@example.com, https://github.com/hasnain"
                   required
                 />
               </div>

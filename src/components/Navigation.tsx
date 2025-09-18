@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-
+import { useProfile } from "@/hooks/useProfile";
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -10,8 +10,8 @@ const Navigation = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -32,6 +32,7 @@ const Navigation = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setIsOpen(false);
   };
+  const { data: profile } = useProfile();
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -44,7 +45,7 @@ const Navigation = () => {
             onClick={scrollToTop}
             className="text-2xl font-bold font-heading bg-gradient-primary bg-clip-text text-transparent hover:opacity-80 transition-opacity"
           >
-            John Doe
+          {profile?.name || "User"}
           </button>
 
           {/* Desktop Navigation */}

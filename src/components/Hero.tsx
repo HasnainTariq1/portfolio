@@ -24,7 +24,7 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <h1 className="text-6xl md:text-8xl font-bold font-heading mb-6 bg-gradient-primary bg-clip-text text-transparent">
-          {profile?.name || "John Doe"}
+          {profile?.name || "Hasnain"}
         </h1>
         <p className="text-2xl md:text-3xl text-muted-foreground mb-4 font-light">
           {profile?.title || "Full Stack Developer"}

@@ -50,7 +50,7 @@ const Contact = () => {
 
   // Fallback contact info
   const defaultContactInfo = [
-    { id: 1, type: 'contact', icon: 'Mail', label: "Email", value: "john.doe@example.com", href: "mailto:john.doe@example.com", order_index: 0, created_at: "" },
+    { id: 1, type: 'contact', icon: 'Mail', label: "Email", value: "hasnain@example.com", href: "mailto:hasnain@example.com", order_index: 0, created_at: "" },
     { id: 2, type: 'contact', icon: 'Phone', label: "Phone", value: "+1 (555) 123-4567", href: "tel:+15551234567", order_index: 1, created_at: "" },
     { id: 3, type: 'contact', icon: 'MapPin', label: "Location", value: "San Francisco, CA", href: "#", order_index: 2, created_at: "" }
   ];

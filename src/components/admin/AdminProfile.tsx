@@ -69,7 +69,7 @@ const AdminProfile = () => {
                 id="name"
                 value={formData.name}
                 onChange={(e) => handleChange("name", e.target.value)}
-                placeholder="John Doe"
+                placeholder="Hasnain"
               />
             </div>
             <div className="space-y-2">

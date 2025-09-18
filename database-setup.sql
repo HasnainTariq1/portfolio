@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS messages (
 
 -- Insert default data
 INSERT INTO profile (name, title, description) VALUES 
-('John Doe', 'Full Stack Developer', 'Crafting beautiful, functional web experiences with modern technologies. Passionate about clean code and innovative solutions.') 
+('Hasnain', 'Full Stack Developer', 'Crafting beautiful, functional web experiences with modern technologies. Passionate about clean code and innovative solutions.') 
 ON CONFLICT DO NOTHING;
 
 INSERT INTO about (content, traits) VALUES 
@@ -89,9 +89,9 @@ I specialize in modern web technologies and love working with React, Node.js, an
 ON CONFLICT DO NOTHING;
 
 INSERT INTO contact_info (type, label, value, href, icon, order_index) VALUES 
-('contact', 'Email', 'john.doe@example.com', 'mailto:john.doe@example.com', 'Mail', 0),
-('contact', 'Phone', '+1 (555) 123-4567', 'tel:+15551234567', 'Phone', 1),
-('contact', 'Location', 'San Francisco, CA', '#', 'MapPin', 2),
+('contact', 'Email', 'Hasnain@example.com', 'mailto:Hasnain@example.com', 'Mail', 0),
+('contact', 'Phone', '+92 (310) 840-8796', 'tel:+923108408796', 'Phone', 1),
+('contact', 'Location', 'Karachi, Pakistan', '#', 'MapPin', 2),
 ('social', 'GitHub', 'GitHub', 'https://github.com', 'Github', 0),
 ('social', 'LinkedIn', 'LinkedIn', 'https://linkedin.com', 'Linkedin', 1),
 ('social', 'Twitter', 'Twitter', 'https://twitter.com', 'Twitter', 2)
