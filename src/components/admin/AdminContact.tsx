@@ -5,8 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Mail, Phone, MapPin, Github, Linkedin, Twitter, Globe } from "lucide-react";
-import { useContactInfo, useCreateContactInfo } from "@/hooks/useContact";
+import { Plus, Mail, Phone, MapPin, Github, Linkedin, Twitter, Globe, Trash2 } from "lucide-react";
+import { useContactInfo, useCreateContactInfo, useDeleteContactInfo } from "@/hooks/useContact";
 import { useToast } from "@/hooks/use-toast";
 
 const iconMap = {
@@ -22,6 +22,7 @@ const iconMap = {
 const AdminContact = () => {
   const { data: contactInfo = [] } = useContactInfo();
   const createContactInfo = useCreateContactInfo();
+  const deleteContactInfo = useDeleteContactInfo();
   const { toast } = useToast();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -56,6 +57,19 @@ const AdminContact = () => {
       toast({
         title: "Error",
         description: "Failed to create contact info",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      await deleteContactInfo.mutateAsync(id);
+      toast({ title: "Success", description: "Contact info deleted successfully!" });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to delete contact info",
         variant: "destructive",
       });
     }
@@ -180,14 +194,24 @@ const AdminContact = () => {
               {contactItems.map((item) => {
                 const IconComponent = iconMap[item.icon as keyof typeof iconMap];
                 return (
-                  <div key={item.id} className="flex items-center gap-4 p-3 bg-secondary/50 rounded-lg">
-                    <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
-                      <IconComponent className="w-5 h-5 text-primary-foreground" />
+                  <div key={item.id} className="flex items-center justify-between gap-4 p-3 bg-secondary/50 rounded-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
+                        <IconComponent className="w-5 h-5 text-primary-foreground" />
+                      </div>
+                      <div>
+                        <p className="font-medium">{item.label}</p>
+                        <p className="text-sm text-muted-foreground">{item.value}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-medium">{item.label}</p>
-                      <p className="text-sm text-muted-foreground">{item.value}</p>
-                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleDelete(item.id)}
+                      className="text-destructive hover:text-destructive"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
                   </div>
                 );
               })}
@@ -205,14 +229,24 @@ const AdminContact = () => {
               {socialItems.map((item) => {
                 const IconComponent = iconMap[item.icon as keyof typeof iconMap];
                 return (
-                  <div key={item.id} className="flex items-center gap-4 p-3 bg-secondary/50 rounded-lg">
-                    <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
-                      <IconComponent className="w-5 h-5 text-primary-foreground" />
+                  <div key={item.id} className="flex items-center justify-between gap-4 p-3 bg-secondary/50 rounded-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
+                        <IconComponent className="w-5 h-5 text-primary-foreground" />
+                      </div>
+                      <div>
+                        <p className="font-medium">{item.label}</p>
+                        <p className="text-sm text-muted-foreground">{item.value}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-medium">{item.label}</p>
-                      <p className="text-sm text-muted-foreground">{item.value}</p>
-                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleDelete(item.id)}
+                      className="text-destructive hover:text-destructive"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
                   </div>
                 );
               })}

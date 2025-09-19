@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { useProfile } from "@/hooks/useProfile";
-import heroImage from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
   const { data: profile } = useProfile();
@@ -12,25 +11,19 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-        style={{ backgroundImage: `url(${profile?.hero_image_url || heroImage})` }}
-      />
-      
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-secondary" />
+      {/* Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-primary/10" />
       
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <h1 className="text-6xl md:text-8xl font-bold font-heading mb-6 bg-gradient-primary bg-clip-text text-transparent">
-          {profile?.name || "Hasnain"}
+          {profile?.name || "Hasnain Tariq"}
         </h1>
         <p className="text-2xl md:text-3xl text-muted-foreground mb-4 font-light">
-          {profile?.title || "Full Stack Developer"}
+          {profile?.title || "AI Engineer"}
         </p>
         <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-          {profile?.description || "Crafting beautiful, functional web experiences with modern technologies. Passionate about clean code and innovative solutions."}
+          {profile?.description || "Creating AI-driven solutions with a strong foundation in clean architecture and modern development practices."}
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

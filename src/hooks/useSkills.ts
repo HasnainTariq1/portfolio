@@ -64,3 +64,39 @@ export const useCreateSkill = () => {
     },
   });
 };
+
+export const useDeleteSkill = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: async (id: number) => {
+      const { error } = await supabase
+        .from('skills')
+        .delete()
+        .eq('id', id);
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['skills-with-categories'] });
+    },
+  });
+};
+
+export const useDeleteSkillCategory = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: async (id: number) => {
+      const { error } = await supabase
+        .from('skill_categories')
+        .delete()
+        .eq('id', id);
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['skills-with-categories'] });
+    },
+  });
+};

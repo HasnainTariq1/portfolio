@@ -45,7 +45,7 @@ const Navigation = () => {
             onClick={scrollToTop}
             className="text-2xl font-bold font-heading bg-gradient-primary bg-clip-text text-transparent hover:opacity-80 transition-opacity"
           >
-          {profile?.name || "User"}
+          {profile?.name || "Hasnain Tariq"}
           </button>
 
           {/* Desktop Navigation */}

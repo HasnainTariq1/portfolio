@@ -57,6 +57,24 @@ export const useSubmitMessage = () => {
   });
 };
 
+export const useDeleteContactInfo = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: async (id: number) => {
+      const { error } = await supabase
+        .from('contact_info')
+        .delete()
+        .eq('id', id);
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['contact-info'] });
+    },
+  });
+};
+
 export const useMessages = () => {
   return useQuery({
     queryKey: ['messages'],
