@@ -2,13 +2,14 @@ import { useAuth, useSignOut } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LogOut, User, FileText, Briefcase, Code, Mail, MessageSquare } from "lucide-react";
+import { LogOut, User, FileText, Briefcase, Code, Mail, MessageSquare, Settings } from "lucide-react";
 import AdminProfile from "@/components/admin/AdminProfile";
 import AdminAbout from "@/components/admin/AdminAbout";
 import AdminProjects from "@/components/admin/AdminProjects";
 import AdminSkills from "@/components/admin/AdminSkills";
 import AdminContact from "@/components/admin/AdminContact";
 import AdminMessages from "@/components/admin/AdminMessages";
+import AdminServices from "@/components/admin/AdminServices";
 
 const Admin = () => {
   const { data: user, isLoading } = useAuth();
@@ -67,7 +68,7 @@ const Admin = () => {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="profile" className="w-full">
-              <TabsList className="grid w-full grid-cols-6 mb-6">
+              <TabsList className="grid w-full grid-cols-7 mb-6">
                 <TabsTrigger value="profile" className="flex items-center gap-2">
                   <User className="w-4 h-4" />
                   Profile
@@ -75,6 +76,10 @@ const Admin = () => {
                 <TabsTrigger value="about" className="flex items-center gap-2">
                   <FileText className="w-4 h-4" />
                   About
+                </TabsTrigger>
+                <TabsTrigger value="services" className="flex items-center gap-2">
+                  <Settings className="w-4 h-4" />
+                  Services
                 </TabsTrigger>
                 <TabsTrigger value="projects" className="flex items-center gap-2">
                   <Briefcase className="w-4 h-4" />
@@ -100,6 +105,10 @@ const Admin = () => {
               
               <TabsContent value="about">
                 <AdminAbout />
+              </TabsContent>
+              
+              <TabsContent value="services">
+                <AdminServices />
               </TabsContent>
               
               <TabsContent value="projects">

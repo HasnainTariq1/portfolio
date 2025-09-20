@@ -15,7 +15,7 @@ const About = () => {
         
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <div className="text-lg text-muted-foreground leading-relaxed whitespace-pre-wrap">
+            <div className="text-lg text-muted-foreground leading-relaxed whitespace-pre-wrap text-justify">
               {about?.content || `I m Hasnain Tariq, a passionate Machine Learning & AI Engineer with hands-on experience in NLP, Large Language Models, RAG, LangChain, LangGraph, and Agentic AI. I started my journey as a Backend Developer with Django and have since transitioned into building intelligent, scalable AI-powered solutions that bridge backend systems with advanced ML pipelines.`}
             </div>
             <div className="flex flex-wrap gap-3 pt-4">

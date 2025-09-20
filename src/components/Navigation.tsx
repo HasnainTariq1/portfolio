@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useProfile } from "@/hooks/useProfile";
+import ThemeToggle from "./ThemeToggle";
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,6 +20,7 @@ const Navigation = () => {
   const navItems = [
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
+    { name: 'Services', href: '#services' },
     { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' }
   ];
@@ -48,6 +51,7 @@ const Navigation = () => {
           {profile?.name || "Hasnain Tariq"}
           </button>
 
+        
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
@@ -59,6 +63,7 @@ const Navigation = () => {
                 {item.name}
               </button>
             ))}
+            <ThemeToggle />
             <Button 
               onClick={() => scrollToSection('#contact')}
               className="bg-gradient-primary hover:opacity-90 transition-opacity"
@@ -91,12 +96,15 @@ const Navigation = () => {
                   {item.name}
                 </button>
               ))}
-              <Button 
-                onClick={() => scrollToSection('#contact')}
-                className="w-full bg-gradient-primary hover:opacity-90 transition-opacity"
-              >
-                Hire Me
-              </Button>
+              <div className="flex items-center justify-between">
+                <ThemeToggle />
+                <Button 
+                  onClick={() => scrollToSection('#contact')}
+                  className="bg-gradient-primary hover:opacity-90 transition-opacity"
+                >
+                  Hire Me
+                </Button>
+              </div>
             </div>
           </div>
         )}

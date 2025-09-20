@@ -170,6 +170,39 @@ export type Database = {
         }
         Relationships: []
       }
+      services: {
+        Row: {
+          created_at: string
+          description: string
+          features: string[] | null
+          icon: string
+          id: number
+          order_index: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          features?: string[] | null
+          icon: string
+          id?: number
+          order_index?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          features?: string[] | null
+          icon?: string
+          id?: number
+          order_index?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       skill_categories: {
         Row: {
           created_at: string
