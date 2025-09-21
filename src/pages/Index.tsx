@@ -22,12 +22,12 @@ const Index = () => {
       </main>
       
       {/* Footer */}
-      <footer className="bg-foreground text-background py-8 px-4">
+      <footer className="bg-secondary text-secondary-foreground py-8 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-lg font-medium mb-2">
             {profile?.name || "Hasnain Tariq"}
           </p>
-          <p className="text-background/70">
+          <p className=" text-secondary-foreground text-background/70">
             © 2025 All rights reserved. Hasnain Tariq.
           </p>
         </div>
